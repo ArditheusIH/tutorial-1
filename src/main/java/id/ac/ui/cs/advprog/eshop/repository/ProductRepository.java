@@ -2,10 +2,12 @@ package id.ac.ui.cs.advprog.eshop.repository;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import org.springframework.stereotype.Repository;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Comparator;
 
 @Repository
 public class ProductRepository {
@@ -15,6 +17,20 @@ public class ProductRepository {
         return product;
     }
 
+    public Product findProductByName(String name) {
+        for (Product product : productData) {
+            if (product.getProductName().equals(name)) {
+                return product;
+            }
+        }
+        return null;
+    }
+    public Product deleteProductByName(String name) {
+        Product yangMauDihapus = findProductByName(name);
+        productData.remove(yangMauDihapus);
+        productData.sort(Comparator.comparing(Product::getProductName));
+        return yangMauDihapus;
+    }
     public  Iterator<Product> findAll() {
         return productData.iterator();
     }
