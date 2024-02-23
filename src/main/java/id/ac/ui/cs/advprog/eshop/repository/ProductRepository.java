@@ -34,4 +34,12 @@ public class ProductRepository {
     public  Iterator<Product> findAll() {
         return productData.iterator();
     }
+
+    public Product editProduct(String name, Product newProduct) {
+        Product product = findProductByName(name);
+        product.setProductName(newProduct.getProductName());
+        product.setProductQuantity(newProduct.getProductQuantity());
+        product.setProductId(newProduct.getProductId());
+        return product;
+    }
 }
