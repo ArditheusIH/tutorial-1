@@ -13,8 +13,15 @@ import java.util.Comparator;
 public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
     public Product create(Product product){
-        productData.add(product);
-        return product;
+        Product sameProductName = findProductByName(product.getProductName());
+        if (sameProductName != null) {
+            sameProductName.setProductQuantity(sameProductName.getProductQuantity() + product.getProductQuantity());
+            return sameProductName;
+        } else {
+            productData.add(product);
+            productData.sort(Comparator.comparing(Product::getProductName));
+            return product;
+        }
     }
 
     public Product findProductByName(String name) {
@@ -41,5 +48,9 @@ public class ProductRepository {
         product.setProductQuantity(newProduct.getProductQuantity());
         product.setProductId(newProduct.getProductId());
         return product;
+    }
+
+    public List<Product> getProductData() {
+        return productData;
     }
 }
