@@ -13,7 +13,7 @@ public class OrderTest {
     void setUp() {
         this.products = new ArrayList<>();
         Product product1 = new Product();
-        product1.setProductId("eb558e9f-1c39—460e—8860—71af6af53bd6");
+        product1.setProductId("eb558e9f-1c39—460e—8860—71af6af63bd6");
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(2);
         Product product2 = new Product();
@@ -39,7 +39,7 @@ public class OrderTest {
     @Test
     void testCreateOrderDefaultStatus() {
         Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
-                this.products, 1708560000L, "Safira Sudirajat", "");
+                this.products, 1708560000L, "Safira Sudrajat" );
 
         assertSame(this.products , order.getProducts());
         assertEquals( 2 , order.getProducts().size());
@@ -48,14 +48,14 @@ public class OrderTest {
 
         assertEquals( "13652556-012a-4c07-b546-54eb1396d79b",  order.getId());
         assertEquals( 1708560000L , order.getOrderTime());
-        assertEquals( "Safira Sudirajat" , order.getAuthor());
+        assertEquals( "Safira Sudrajat" , order.getAuthor());
         assertEquals("WAITING_PAYMENT" , order.getStatus());
     }
 
     @Test
     void testCreateOrderSuccessStatus() {
         Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
-                this.products, 1708560000L, "Safira Sudirajat", "SUCCESS");
+                this.products, 1708560000L, "Safira Sudrajat", "SUCCESS");
         assertEquals("SUCCESS", order.getStatus());
     }
 
@@ -63,7 +63,7 @@ public class OrderTest {
     void testCreateOrderInvalidStatus(){
         assertThrows(IllegalArgumentException.class, () -> {
             Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
-                    this.products, 1708560000L, "Safira Sudirajat", "SUCCESS");
+                    this.products, 1708560000L, "Safira Sudrajat", "MEOW");
             assertEquals("SUCCESS", order.getStatus());
         });
     }
@@ -71,7 +71,7 @@ public class OrderTest {
     @Test
     void testSetStatusToCancelled(){
         Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
-                this.products, 1708560000L, "Safira Sudirajat", "SUCCESS");
+                this.products, 1708560000L, "Safira Sudrajat", "SUCCESS");
         order.setStatus("CANCELLED");
         assertEquals("CANCELLED", order.getStatus());
     }
@@ -79,7 +79,7 @@ public class OrderTest {
     @Test
     void testSetStatusToInvalidStatus(){
         Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
-                this.products, 1708560000L, "Safira Sudirajat", "SUCCESS");
+                this.products, 1708560000L, "Safira Sudrajat");
         assertThrows(IllegalArgumentException.class, () -> order.setStatus("MEOW"));
     }
 }
